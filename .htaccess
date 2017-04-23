@@ -1,0 +1,3 @@
+<Files emo*/*>
+    deny from all
+</Files>
