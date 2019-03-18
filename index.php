@@ -21,11 +21,11 @@ $title="DXSdata EmojiOne2Spark - IconSet Builder";
 $blogUrl = "http://www.dxsdata.com/2017/04/emoticons-for-openfire-spark-messenger/";
 
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 
-if ($_POST['action'] == 'generate')
+if (@$_POST['action'] == 'generate')
 {               
     $emoticons = json_decode(file_get_contents($sourceJsonFile));
     $xml = new SimpleXMLElement(file_get_contents($plistTemplate));     
