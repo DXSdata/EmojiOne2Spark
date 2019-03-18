@@ -8,6 +8,8 @@
 * 
 */
 
+
+
 $iconsetName = 'DXSdata.AdiumEmoticonSet';
 $zipfilename = 'DXSdata.AdiumEmoticonSet.zip';
 $sourceJsonFile = 'emojione-master/emoji.json';
@@ -17,6 +19,11 @@ $tmpDir = '/tmp';
 $tmpFilePrefix = 'tmpEmoticons';
 $title="DXSdata EmojiOne2Spark - IconSet Builder";
 $blogUrl = "http://www.dxsdata.com/2017/04/emoticons-for-openfire-spark-messenger/";
+
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 
 if ($_POST['action'] == 'generate')
 {               
@@ -37,6 +44,7 @@ if ($_POST['action'] == 'generate')
     foreach($emoticons as $filename => $emoticon)
     {
         //echo $emoticon -> name;
+        //echo $filename;
         
         //Filtering
         if (!in_array($emoticon -> category, $categories))
@@ -64,7 +72,11 @@ if ($_POST['action'] == 'generate')
         $dict -> addChild('string', $emoticon -> name); 
                                    
         //Import into zip
-        $zip->addFile('emoticons'.$iconsize.'/'.$filename . '.png', $iconsetName.'/'.$filename . '.png');           
+        $filenameSystem = 'emoticons'.$iconsize.'/'.$filename . '.png';
+        $filenameInZip = $iconsetName.'/'.$filename . '.png';
+        if (!($zip->addFile($filenameSystem, $filenameInZip)))
+            echo "Error adding $filename to zip! Does file exist?<br>";
+        //echo $filenameInZip . " | "       . $filenameSystem . "<br>";
     }
      
      
